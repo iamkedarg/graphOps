@@ -6,20 +6,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PathFinderTest {
-	City a,b,c,d,e,f,g,h;
+	Airport a,b,c,d,e,f,g,h;
 	
 	@Before
 	public void setUp() throws Exception {
-		System.out.println("in setup");
 		
-		a = new City("A");
-		b = new City("B");
-		c = new City("C");
-		d = new City("D");
-		e = new City("E");
-		f = new City("F");
-		g = new City("G");
-		h = new City("H");
+		a = new Airport("A");
+		b = new Airport("B");
+		c = new Airport("C");
+		d = new Airport("D");
+		e = new Airport("E");
+		f = new Airport("F");
+		g = new Airport("G");
+		h = new Airport("H");
 
 		final int DISTANCE = 1;
 
@@ -67,6 +66,6 @@ public class PathFinderTest {
 	public void testForShotestPath() {
 		String path = Pathfinder.generateShortestPath(c, f);
 		Assert.assertEquals("Test case testing shortest path failed", "C-E-B-A-F" , path);
-		Assert.assertEquals(4, f.distance.intValue());
+		Assert.assertEquals(4, f.getDistance().intValue());
 	}
 }

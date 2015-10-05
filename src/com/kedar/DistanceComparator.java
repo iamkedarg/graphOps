@@ -2,12 +2,12 @@ package com.kedar;
 
 import java.util.Comparator;
 
-public class DistanceComparator implements Comparator<City> {
+public class DistanceComparator implements Comparator<Airport> {
 
 	@Override
-	public int compare(City o1, City o2) {
+	public int compare(Airport o1, Airport o2) {
 		// TODO Auto-generated method stub
-		return Integer.compare(o1.distance, o2.distance);
+		return Integer.compare(o1.getDistance(), o2.getDistance());
 	}
 
 }

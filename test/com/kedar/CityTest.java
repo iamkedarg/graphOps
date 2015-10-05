@@ -18,22 +18,22 @@ public class CityTest {
 
 	@Test
 	public void testNewCity() {
-		City city = new City("A");
-		Assert.assertEquals("A",city.name);
-		Assert.assertEquals(0, city.connections.size());
-		Assert.assertNull(city.sourceCity);
+		Airport city = new Airport("A");
+		Assert.assertEquals("A",city.getName());
+		Assert.assertEquals(0, city.getConnections().size());
+		Assert.assertNull(city.getSourceAirport());
 	}
 	
 	@Test
 	public void testAddConnection() {
-		City city = new City("B");
-		City anotherCity = new City("C");
+		Airport city = new Airport("B");
+		Airport anotherCity = new Airport("C");
 		
-		Assert.assertEquals(0, city.connections.size());
+		Assert.assertEquals(0, city.getConnections().size());
 		Connection conn = new Connection(anotherCity, 1);
-		Assert.assertEquals(1, conn.distance);
+		Assert.assertEquals(1, conn.getDistance());
 		city.addConnection(conn);
-		Assert.assertEquals(1, city.connections.size());
+		Assert.assertEquals(1, city.getConnections().size());
 	}
 
 }

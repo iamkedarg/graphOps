@@ -6,12 +6,19 @@ package com.kedar;
  *
  */
 public class Connection {
-	int distance;
-	City city;
-	
-	public Connection(City city, int distance) {
+	private int distance;
+	private Airport city;
+
+	public Connection(Airport city, int distance) {
 		this.city = city;
 		this.distance = distance;
+	}
+	public int getDistance() {
+		return distance;
+	}
+
+	public Airport getCity() {
+		return city;
 	}
 	
 	public String toString() {

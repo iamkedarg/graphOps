@@ -19,10 +19,10 @@ public class DistanceComparatorTest {
 
 	@Test
 	public void test() {
-		City cityA = new City("A");
-		cityA.distance = 10;
-		City cityB = new City("B");
-		cityB.distance = 20;
+		Airport cityA = new Airport("A");
+		cityA.setDistance(10);
+		Airport cityB = new Airport("B");
+		cityB.setDistance(20);
 		
 		int result = comparator.compare(cityA, cityB);
 		Assert.assertEquals(-1, result);

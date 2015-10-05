@@ -12,24 +12,24 @@ public class Pathfinder {
 	
 	public final static String DESTINATION_CANT_REACHED = "Destination can't be reached.";
 
-	public static String generateShortestPath(City startCity, City destinationCity) {
+	public static String generateShortestPath(Airport startCity, Airport destinationCity) {
 		
-		if (startCity.connections.size() == 0) {
+		if (startCity.getConnections().size() == 0) {
 			return DESTINATION_CANT_REACHED;
 		}
-		PriorityQueue<City> queue = new PriorityQueue<>(10,
+		PriorityQueue<Airport> airports = new PriorityQueue<>(10,
 				new DistanceComparator());
-		startCity.distance = 0;
-		queue.add(startCity);
+		startCity.setDistance(0);
+		airports.add(startCity);
 
 		boolean destinationReached = false;
-		while (queue.size() > 0 && !destinationReached) {
-			City city = queue.poll();
+		while (airports.size() > 0 && !destinationReached) {
+			Airport city = airports.poll();
 
 			if (city == destinationCity) {
 				destinationReached = true;
 			} else {
-				processConnections(queue, city);
+				processConnections(airports, city);
 			}
 		}
 		
@@ -39,37 +39,37 @@ public class Pathfinder {
 		
 		///build the path
 		String s = buildPath(destinationCity);
-		queue.clear();
+		airports.clear();
 		return s;
 	}
 
-	private static String buildPath(City destinationCity) {
+	private static String buildPath(Airport destinationCity) {
 		StringBuffer s = new StringBuffer();
-		City city = destinationCity;
+		Airport city = destinationCity;
 		while (city != null) {
-			if (city.sourceCity != null)
-				s.append(city.name + "-");
+			if (city.getSourceAirport() != null)
+				s.append(city.getName() + "-");
 			else
-				s.append(city.name);
-			city = city.sourceCity;
+				s.append(city.getName());
+			city = city.getSourceAirport();
 		}
 		return s.reverse().toString();
 	}
 
-	private static void processConnections(PriorityQueue<City> queue, City city) {
+	private static void processConnections(PriorityQueue<Airport> airports, Airport city) {
 		List<Connection> connections = city.getConnections();
 		for (Iterator<Connection> iterator = connections.iterator(); iterator
 				.hasNext();) {
 			Connection connection = iterator.next();
-			City anotherCity = connection.city;
+			Airport neighbor = connection.getCity();
 			
-			if (anotherCity.distance > city.distance
-					+ connection.distance) {
-				anotherCity.distance = city.distance
-						+ connection.distance;
-				anotherCity.sourceCity = city;
-				queue.remove(anotherCity);
-				queue.add(anotherCity);
+			if (neighbor.getDistance() > city.getDistance()
+					+ connection.getDistance()) {
+				neighbor.setDistance(city.getDistance()
+						+ connection.getDistance());
+				neighbor.setSourceAirport(city);
+				airports.remove(neighbor);
+				airports.add(neighbor);
 			}
 		}
 	}
